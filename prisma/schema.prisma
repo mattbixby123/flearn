@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id            String         @id @default(uuid())
+  username      String         @unique
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  profile       userProfile?
+  decks         deck[]
+  cardLists     cardList[]
+  studySessions studySession[]
+}
+
+model userProfile {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      user     @relation(fields: [userId], references: [id])
+  firstName String?
+  lastName  String?
+  avatar    String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model deck {
+  id            String         @id @default(uuid())
+  name          String
+  description   String?
+  userId        String
+  user          user           @relation(fields: [userId], references: [id])
+  cards         card[]
+  cardLists     cardList[]
+  studySessions studySession[]
+  tags          tag[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model card {
+  id        String     @id @default(uuid())
+  front     String
+  back      String
+  deckId    String
+  deck      deck       @relation(fields: [deckId], references: [id])
+  cardLists cardList[]
+  tags      tag[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model cardList {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  user      user     @relation(fields: [userId], references: [id])
+  deckId    String
+  deck      deck     @relation(fields: [deckId], references: [id])
+  cards     card[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model studySession {
+  id        String    @id @default(uuid())
+  userId    String
+  user      user      @relation(fields: [userId], references: [id])
+  deckId    String
+  deck      deck      @relation(fields: [deckId], references: [id])
+  startTime DateTime
+  endTime   DateTime?
+  score     Int?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model tag {
+  id        String   @id @default(uuid())
+  name      String
+  decks     deck[]
+  cards     card[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name])
+}
