@@ -1,5 +1,13 @@
 ## flearn
 
-info update
+in server terminal for express server
 
-first day back from vacation. testing new commit
+```
+npm run start
+```
+
+in client terminal for front end server
+
+```
+npm run start
+```
