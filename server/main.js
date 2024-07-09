@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 // Backend routes
 // app.use("/api", require("./api"));
-// app.use("/auth", require("./auth"));
+app.use("/auth", require("./auth"));
 
 
 // Error handling middleware

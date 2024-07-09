@@ -8,6 +8,7 @@ export const api = createApi({
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
+      headers.set('Content-Type', 'application/json');
       return headers;
     },
   }),
@@ -20,10 +21,10 @@ export const api = createApi({
       }),
     }),
     login: builder.mutation({
-      query: (credentials) => ({
+      query: (body) => ({
         url: 'auth/login',
         method: 'POST',
-        body: credentials,
+        body,
       }),
     }),
     getUser: builder.query<any, void>({
