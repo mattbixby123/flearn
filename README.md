@@ -2,13 +2,13 @@
 
 to run local dev server follow these steps:
 
-1. in client terminal for front end server
+## 1. in client terminal for front end server
 
 ```
 npm start
 ```
 
-2. in server terminal for express server
+## 2. in server terminal for express server
 
 ```
 npm run server
