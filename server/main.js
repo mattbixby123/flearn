@@ -23,7 +23,7 @@ const bodyParser = require('body-parser')
 // Use body-parser middleware to parse JSON bodies
 app.use(bodyParser.json());
 // Static file-serving middleware / only needed for deployment
-app.use(express.static(path.join(__dirname, "..", "client/dist")));
+// app.use(express.static(path.join(__dirname, "..", "client/dist")));
 
 // express-paginate middleware
 app.all(function(req, res, next) {
