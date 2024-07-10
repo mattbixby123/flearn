@@ -1,7 +1,7 @@
 {
   "name": "flearn",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "node server/main.js",
     "server": "nodemon server/main.js",
@@ -22,6 +22,7 @@
     "@prisma/client": "^5.16.1",
     "bcrypt": "^5.1.1",
     "concurrently": "^7.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",

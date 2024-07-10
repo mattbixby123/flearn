@@ -1,11 +1,19 @@
 require('dotenv').config() //load env variables
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors'); // Add this line
 const app = express();
 const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 3000;
 const path = require('path')
 
+// CORS configuration
+const corsOptions = {
+  origin: 'http://localhost:5173', // Replace with your Vite frontend URL
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions)); // Add this line
 
 app.use(express.json());
 app.use(morgan('dev'));
