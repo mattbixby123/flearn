@@ -16,7 +16,7 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({
     // Auth endpoints
-    getCurrentUser: builder.query({
+    me: builder.query({
       query: () => 'auth/me',
     }),
     register: builder.mutation({
@@ -104,7 +104,7 @@ export const api = createApi({
 export const {
   useRegisterMutation,
   useLoginMutation,
-  useGetCurrentUserQuery,
+  useMeQuery,
   // useCreateDeckMutation,
   // useGetDecksQuery,
   // useGetDeckQuery,

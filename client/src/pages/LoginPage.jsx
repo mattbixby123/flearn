@@ -1,52 +1,73 @@
-// src/pages/LoginPage.jsx
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '../store/api'
-import { useDispatch } from 'react-redux'
-import { setUser, setToken } from '../store/authSlice'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../redux/api';
+import { setToken, setUser } from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
 
 function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [login, { isLoading, error }] = useLoginMutation()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const result = await login({ email, password }).unwrap()
-      dispatch(setUser(result.user))
-      dispatch(setToken(result.token))
-      navigate('/')
+      const result = await login({ email, password }).unwrap();
+      if (result.token) {
+        dispatch(setToken(result.token));
+        dispatch(setUser(result.user));
+        setEmail('');
+        setPassword('');
+        navigate('/');
+      }
     } catch (err) {
-      // Error is handled by RTK Query and available in the `error` variable
-      console.error('Failed to login:', err)
+      console.error('Failed to login:', err);
+      setMessage(err.data?.message || 'An error occurred during login');
     }
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Logging in...' : 'Login'}
-      </button>
-      {error && <p>Error: {error.data?.message || 'An error occurred'}</p>}
-    </form>
-  )
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
+      </form>
+      {message && <p>{message}</p>}
+    </div>
+  );
 }
 
-export default LoginPage
+export default LoginPage;

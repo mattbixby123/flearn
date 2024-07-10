@@ -61,8 +61,6 @@ router.post("/login", async (req, res, next) => {
 router.get("/me", async (req, res, next) => {
   try {
     let user;
-    let userProfile;
-    
 
     // Check if user is authenticated
     if (req.user) {
@@ -71,22 +69,13 @@ router.get("/me", async (req, res, next) => {
           id: req.user.id,
         },
         include: {
-          userProfile: true,
+          profile: true,
         }
       });
       console.log('user - ', user)
-
       res.send(user);
-    }
-    if (req.userProfile) {
-      userProfile = await prisma.userProfile.findUnique({
-        where: {
-          userId: req.user.id,
-        },
-      });
-      console.log('userProfile - ', userProfile);
-
-      res.send(userProfile);
+    } else {
+      res.status(401).send('User not authenticated');
     }
 
   } catch (error) {
