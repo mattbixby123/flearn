@@ -13,3 +13,5 @@ npm run dev
 ```
 npm run server
 ```
+
+things are starting to work!
