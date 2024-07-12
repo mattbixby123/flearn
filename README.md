@@ -14,4 +14,4 @@ npm run dev
 npm run server
 ```
 
-things are starting to work!
+things are starting to work - login is dispatching token when logged in and providing the auth/me information
