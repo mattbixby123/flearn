@@ -17,10 +17,10 @@ function App() {
     },
   )
 
-  console.log('Token:', token)  // Log the token
-  console.log('User data:', userData)  // Log the user data
-  console.log('Is loading:', isLoading)  // Log the loading state
-  console.log('Error:', error)  // Log any errors
+  // console.log('Token:', token)  // Log the token
+  // console.log('User data:', userData)  // Log the user data
+  // console.log('Is loading:', isLoading)  // Log the loading state
+  // console.log('Error:', error)  // Log any errors
 
   useEffect(() => {
     if (userData) {
@@ -51,6 +51,9 @@ function App() {
           ) : (
             // 
             <p>hi - this shows if you are logged in and the auth/me endpoint is being accessed correctly</p>
+            // view decks
+            // add decks
+            // account
           )}
         </ul>
       </nav>
