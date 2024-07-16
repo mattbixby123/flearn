@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import Logout from './pages/Logout'
+import HomePage from './components/Home'
+import LoginPage from './components/Login'
+import RegisterPage from './components/Register'
+import Logout from './components/Logout'
 import { setUser } from './redux/authSlice'  // Make sure this import is correct
 import { useMeQuery } from './redux/api'
 
