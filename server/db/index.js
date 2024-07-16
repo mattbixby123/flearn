@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient().$extends({
     query: {
-        customer: {
+        user: {
             async create({ model, operation, args, query }) {
                 args.data = {...args.data, password: bcrypt.hashSync(args.data.password, Number(process.env.SALT_ROUNDS))};
                 return query(args)

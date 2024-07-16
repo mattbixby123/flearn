@@ -18,6 +18,7 @@ export const api = createApi({
     // Auth endpoints
     me: builder.query({
       query: () => 'auth/me',
+      providesTags: ["Me"]
     }),
     register: builder.mutation({
       query: (userData) => ({
@@ -25,6 +26,7 @@ export const api = createApi({
         method: 'POST',
         body: userData,
       }),
+      invalidatesTags: ["Me"]
     }),
     login: builder.mutation({
       query: (credentials) => ({
@@ -32,6 +34,11 @@ export const api = createApi({
         method: 'POST',
         body: credentials,
       }),
+      invalidatesTags: ["Me"]
+    }),
+    logout: builder.mutation({
+      queryFn: () => ({ data: {} }),
+      invalidatesTags: ["Me"]
     }),
 
     // Deck endpoints
@@ -105,6 +112,7 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useMeQuery,
+  useLogoutMutation
   // useCreateDeckMutation,
   // useGetDecksQuery,
   // useGetDeckQuery,

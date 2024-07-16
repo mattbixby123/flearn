@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
-// import { clearUser } from '../redux/authSlice'
+import Logout from './pages/Logout'
 import { setUser } from './redux/authSlice'  // Make sure this import is correct
 import { useMeQuery } from './redux/api'
 
@@ -49,11 +49,13 @@ function App() {
               <li><Link to="/register">Register</Link></li>
             </>
           ) : (
-            // 
+            <>
             <p>hi - this shows if you are logged in and the auth/me endpoint is being accessed correctly</p>
             // view decks
             // add decks
             // account
+            <Logout/>
+            </>
           )}
         </ul>
       </nav>
