@@ -29,7 +29,7 @@ model user {
 model userProfile {
   id        String   @id @default(uuid())
   userId    String   @unique
-  user      user     @relation(fields: [userId], references: [id])
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
   firstName String?
   lastName  String?
   avatar    String?
