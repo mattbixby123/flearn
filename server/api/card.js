@@ -3,7 +3,7 @@ const { prisma } = require("../db");
 
 // Card Routes
 // GET all cards
-router.get("/cards", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const cards = await prisma.card.findMany();
     res.json(cards);
@@ -13,7 +13,7 @@ router.get("/cards", async (req, res, next) => {
 });
 
 // GET card by id
-router.get("/cards/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const card = await prisma.card.findUnique({
@@ -30,7 +30,7 @@ router.get("/cards/:id", async (req, res, next) => {
 });
 
 // POST new card
-router.post("/cards", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const { front, back, deckId } = req.body;
     const newCard = await prisma.card.create({
@@ -43,7 +43,7 @@ router.post("/cards", async (req, res, next) => {
 });
 
 // PUT update card
-router.put("/cards/:id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const { front, back } = req.body;
@@ -58,7 +58,7 @@ router.put("/cards/:id", async (req, res, next) => {
 });
 
 // DELETE card
-router.delete("/cards/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     await prisma.card.delete({ where: { id } });
@@ -67,7 +67,5 @@ router.delete("/cards/:id", async (req, res, next) => {
     next(error);
   }
 });
-
-
 
 module.exports = router;

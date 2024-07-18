@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { prisma } = require("../db");
 
 // GET all cardLists
-router.get("/cardLists", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const cardLists = await prisma.cardList.findMany({
       include: {
@@ -18,7 +18,7 @@ router.get("/cardLists", async (req, res, next) => {
 });
 
 // GET cardList by id
-router.get("/cardLists/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const cardList = await prisma.cardList.findUnique({
@@ -39,7 +39,7 @@ router.get("/cardLists/:id", async (req, res, next) => {
 });
 
 // POST new cardList
-router.post("/cardLists", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const { name, userId, deckId, cardIds } = req.body;
     const newCardList = await prisma.cardList.create({
@@ -64,7 +64,7 @@ router.post("/cardLists", async (req, res, next) => {
 });
 
 // PUT update cardList
-router.put("/cardLists/:id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, cardIds } = req.body;
@@ -89,7 +89,7 @@ router.put("/cardLists/:id", async (req, res, next) => {
 });
 
 // DELETE cardList
-router.delete("/cardLists/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     await prisma.cardList.delete({ where: { id } });
