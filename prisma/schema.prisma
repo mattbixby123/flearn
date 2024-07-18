@@ -22,7 +22,6 @@ model user {
   updatedAt     DateTime       @updatedAt
   profile       userProfile?
   decks         deck[]
-  cardLists     cardList[]
   studySessions studySession[]
 }
 
@@ -45,7 +44,6 @@ model deck {
   userId        String
   user          user           @relation(fields: [userId], references: [id])
   cards         card[]
-  cardLists     cardList[]
   studySessions studySession[]
   tags          tag[]
   createdAt     DateTime       @default(now())
@@ -53,25 +51,12 @@ model deck {
 }
 
 model card {
-  id        String     @id @default(uuid())
+  id        String   @id @default(uuid())
   front     String
   back      String
   deckId    String
-  deck      deck       @relation(fields: [deckId], references: [id])
-  cardLists cardList[]
-  tags      tag[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-}
-
-model cardList {
-  id        String   @id @default(uuid())
-  name      String
-  userId    String
-  user      user     @relation(fields: [userId], references: [id])
-  deckId    String
   deck      deck     @relation(fields: [deckId], references: [id])
-  cards     card[]
+  tags      tag[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

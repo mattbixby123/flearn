@@ -23,45 +23,46 @@ async function main() {
 
   console.log(`Created user with ID: ${user.id}`);
 
-  // Create one deck for the user
+  // Create 5 random tags
+  const tags = await Promise.all(
+    Array.from({ length: 5 }).map(() => prisma.tag.create({
+      data: {
+        name: faker.lorem.word(),
+      }
+    }))
+  );
+
+  console.log(`Created 5 tags`);
+
+  // Create one deck for the user and associate it with some tags
   const deck = await prisma.deck.create({
     data: {
       name: faker.lorem.words(3),
       description: faker.lorem.sentence(),
       userId: user.id,
+      tags: {
+        connect: tags.slice(0, 3).map(tag => ({ id: tag.id })) // Associate with first 3 tags
+      }
     }
   });
 
   console.log(`Created deck with ID: ${deck.id}`);
 
-  // Create 10 random cards and associate them with the deck
+  // Create 10 random cards, associate them with the deck and some tags
   const cards = await Promise.all(
     Array.from({ length: 10 }).map(() => prisma.card.create({
       data: {
         front: faker.lorem.sentence(),
         back: faker.lorem.sentence(),
-        deckId: deck.id
+        deckId: deck.id,
+        tags: {
+          connect: tags.slice(0, 2).map(tag => ({ id: tag.id })) // Associate each card with first 2 tags
+        }
       }
     }))
   );
 
   console.log(`Created 10 cards for deck with ID: ${deck.id}`);
-
-  // Create one card list for the deck with all 10 cards
-  const cardList = await prisma.cardList.create({
-    data: {
-      name: faker.lorem.words(2),
-      userId: user.id,
-      deckId: deck.id,
-      cards: {
-        connect: cards.map(card => ({
-          id: card.id
-        }))
-      }
-    }
-  });
-
-  console.log(`Created card list with ID: ${cardList.id} for deck with ID: ${deck.id}`);
 }
 
 main()
