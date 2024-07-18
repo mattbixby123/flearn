@@ -23,3 +23,7 @@ things are starting to work - login is dispatching token when logged in and prov
 ### 07-16-2024:
 
 front end basic structure working. The backend api is ready to be built out with routes for non auth related data base items. Logout button still needed on front end, but login and register work as wel as the conditional renders on the app.jsx
+
+### 07-18-2024
+
+backend api routes all added and in need of testing. All schema tables are populated with seed data, except for studySession. We will sleep on this for now
