@@ -20,7 +20,7 @@ function HomePage() {
           <h2>Key Features</h2>
           <ul>
             <li>Create custom flashcard decks</li>
-            <li>Study with spaced repetition</li>
+            <li>Study with repetition</li>
             <li>Track your progress</li>
             <li>Share decks with friends</li>
             <li>Accomplish all of your goals</li>
