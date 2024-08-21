@@ -27,3 +27,7 @@ front end basic structure working. The backend api is ready to be built out with
 ### 07-18-2024
 
 backend api routes all added and in need of testing. All schema tables are populated with seed data, except for studySession. We will sleep on this for now
+
+### 08-21-2024
+
+revisiting this project and getting aquainted to make more progress on it
