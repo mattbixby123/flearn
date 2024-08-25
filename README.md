@@ -30,4 +30,4 @@ backend api routes all added and in need of testing. All schema tables are popul
 
 ### 08-21-2024
 
-revisiting this project and getting aquainted to make more progress on it - hard time to be breaking into SW
+revisiting this project and getting aquainted to make more progress on it - hard time to be breaking into SW but a great time to be a learner!  
