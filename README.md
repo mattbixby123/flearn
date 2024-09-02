@@ -31,3 +31,7 @@ backend api routes all added and in need of testing. All schema tables are popul
 ### 08-21-2024
 
 revisiting this project and getting aquainted to make more progress on it - hard time to be breaking into SW but a great time to be a learner!  
+
+## 09-02-2024
+
+As i am starting to study algos harder, this app will start coming to life with my lived experiences applied.
