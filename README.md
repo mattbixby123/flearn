@@ -35,3 +35,7 @@ revisiting this project and getting aquainted to make more progress on it - hard
 ## 09-02-2024
 
 As i am starting to study algos harder, this app will start coming to life with my lived experiences applied.
+
+## 09-030-2-24
+
+Great day to be a coder!
